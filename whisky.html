@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Licorería - Whiskys</title>
+
+    <!-- Google Fonts -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Open+Sans&family=Roboto&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Bootstrap 5 -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      crossorigin="anonymous"
+    />
+
+    <!-- Bootstrap Icons -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css"
+      rel="stylesheet"
+      crossorigin="anonymous"
+    />
+
+    <!-- Personal Styles -->
+    <link rel="stylesheet" href="assets/css/styles/style.css" />
+  </head>
+  <body>
+    <!-- Barra superior -->
+    <header class="top-bar bg-danger text-white">
+      <div
+        class="container d-flex justify-content-between align-items-center py-2"
+      >
+        <div class="contacto d-flex align-items-center">
+          <a
+            href="https://wa.me/573022292295?text=Hola,%20estoy%20interesado(a)%20en%20los%20productos%20de%20La%20LICORERIA"
+            class="text-white text-decoration-none me-3"
+          >
+            <i class="bi bi-whatsapp"></i>
+            Cel: 302 229 2295
+          </a>
+          <span>| Email: contacto@licoreria.com</span>
+        </div>
+
+        <!-- Botón buscar -->
+        <form id="form-busqueda" class="d-flex flex-grow-1 mx-3" role="search">
+          <input
+            class="form-control form-control-sm"
+            type="search"
+            placeholder="Buscar productos..."
+            id="campo-busqueda"
+            required
+          />
+          <button class="btn btn-sm btn-outline-light ms-2" type="submit">
+            Buscar
+          </button>
+        </form>
+
+        <!-- Iconos de redes sociales -->
+        <div class="redes-sociales d-flex">
+          <a
+            href="https://www.facebook.com/"
+            target="_blank"
+            class="text-white me-2"
+          >
+            <i class="bi bi-facebook"></i>
+          </a>
+          <a
+            href="https://www.instagram.com/"
+            target="_blank"
+            class="text-white"
+          >
+            <i class="bi bi-instagram"></i>
+          </a>
+        </div>
+      </div>
+    </header>
+
+    <!-- Navbar fijo -->
+    <nav
+      class="navbar navbar-expand-lg bg-light border-bottom shadow-sm sticky-top"
+    >
+      <div class="container d-flex align-items-center justify-content-between">
+        <div class="d-flex align-items-center">
+          <!-- BRAND -->
+          <a class="navbar-brand text-danger fw-bold me-2" href="index.html"
+            >Licorería</a
+          >
+
+          <!-- Carrito visible en móvil -->
+          <a
+            href="#"
+            title="Ver carrito"
+            data-bs-toggle="offcanvas"
+            data-bs-target="#carritoCanvas"
+            class="nav-link position-relative d-lg-none"
+          >
+            <i class="bi bi-cart-fill fs-4"></i>
+            <span
+              id="cart-count-mobile"
+              class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
+            >
+              0
+            </span>
+          </a>
+        </div>
+
+        <!-- Botón toggle -->
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+          aria-controls="navbarNav"
+          aria-expanded="false"
+          aria-label="Alternar navegación"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <!-- Contenedor del menú -->
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link" href="index.html">Inicio</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="cervezas.html">Cervezas</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="vinos.html">Vinos</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="whisky.html">Whisky</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="tequila.html">Tequila</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="acercade.html">Nosotros</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="contacto.html">Contacto</a>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Carrito visible en escritorio -->
+        <a
+          href="#"
+          title="Ver carrito"
+          data-bs-toggle="offcanvas"
+          data-bs-target="#carritoCanvas"
+          class="nav-link position-relative d-none d-lg-block"
+        >
+          <i class="bi bi-cart-fill fs-4"></i>
+          <span
+            id="cart-count-desktop"
+            class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
+          >
+            0
+          </span>
+        </a>
+      </div>
+    </nav>
+
+    <!-- Offcanvas Carrito -->
+    <div
+      class="offcanvas offcanvas-end"
+      tabindex="-1"
+      id="carritoCanvas"
+      aria-labelledby="carritoCanvasLabel"
+    >
+      <div class="offcanvas-header">
+        <h5 class="offcanvas-title" id="carritoCanvasLabel">Tu carrito</h5>
+        <button
+          type="button"
+          class="btn-close text-reset"
+          data-bs-dismiss="offcanvas"
+          aria-label="Cerrar"
+        ></button>
+      </div>
+      <div class="offcanvas-body">
+        <div id="contenido-carrito"></div>
+        <hr />
+        <div class="d-flex justify-content-between">
+          <strong>Total:</strong
+          ><span id="subtotal" class="text-danger fw-bold">$0</span>
+        </div>
+        <div class="d-grid gap-2 mt-4">
+          <a href="index.html" class="btn btn-outline-secondary"
+            >Seguir comprando</a
+          >
+          <a href="carrito.html" class="btn btn-danger">Finalizar compra</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Hero Section con Bootstrap -->
+    <section class="tm-hero py-5 bg-light">
+      <div class="container text-center">
+        <h1 class="text-danger mb-3">Bienvenido a la sección de Whiskys</h1>
+        <p class="mb-4">
+          Descubre nuestros whiskys escoceses, americanos y premium. Cada
+          botella ofrece una experiencia única para paladares exigentes.
+        </p>
+        <img
+          src="assets/img/sliders/slider_whiskys.jpg"
+          class="img-fluid rounded shadow w-100"
+          alt="Whiskys Selección"
+          style="object-fit: cover"
+        />
+      </div>
+    </section>
+
+    <!--  Sección completa: Productos Destacados con Carrito -->
+    <!-- Sección Whiskys -->
+    <section class="py-5 bg-white">
+      <div class="container">
+        <h2 class="text-center text-danger mb-4">
+          Nuestros Whiskys Destacados
+        </h2>
+
+        <div class="row row-cols-1 row-cols-md-3 g-4">
+          <div class="col">
+            <div class="card h-100">
+              <img
+                src="assets/img/whiskys/whisky_escoces.jpg"
+                class="card-img-top"
+                alt="Whisky Escocés"
+              />
+              <div class="card-body">
+                <h5 class="card-title">Whisky Escocés</h5>
+                <p class="card-text">12 años. Sabor profundo y suave.</p>
+                <p class="fw-bold">$130.000</p>
+                <button
+                  class="btn btn-custom w-100 btn-agregar"
+                  data-nombre="Whisky Escocés"
+                  data-precio="130000"
+                  data-imagen="whisky_escoces.jpg"
+                >
+                  Agregar al carrito
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div class="col">
+            <div class="card h-100">
+              <img
+                src="assets/img/whiskys/whisky_americano.jpg"
+                class="card-img-top"
+                alt="Whisky Americano"
+              />
+              <div class="card-body">
+                <h5 class="card-title">Whisky Americano</h5>
+                <p class="card-text">Fuerte y con carácter.</p>
+                <p class="fw-bold">$115.000</p>
+                <button
+                  class="btn btn-custom w-100 btn-agregar"
+                  data-nombre="Whisky Americano"
+                  data-precio="115000"
+                  data-imagen="whisky_americano.jpg"
+                >
+                  Agregar al carrito
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div class="col">
+            <div class="card h-100">
+              <img
+                src="assets/img/whiskys/whisky_premium.jpg"
+                class="card-img-top"
+                alt="Whisky Premium"
+              />
+              <div class="card-body">
+                <h5 class="card-title">Whisky Premium</h5>
+                <p class="card-text">Edición limitada. Suave y elegante.</p>
+                <p class="fw-bold">$155.000</p>
+                <button
+                  class="btn btn-custom w-100 btn-agregar"
+                  data-nombre="Whisky Premium"
+                  data-precio="155000"
+                  data-imagen="whisky_premium.jpg"
+                >
+                  Agregar al carrito
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div class="col">
+            <div class="card h-100">
+              <img
+                src="assets/img/whiskys/whisky_irlandes.jpg"
+                class="card-img-top"
+                alt="Whisky Irlandés"
+              />
+              <div class="card-body">
+                <h5 class="card-title">Whisky Irlandés</h5>
+                <p class="card-text">Triple destilado para un sabor limpio.</p>
+                <p class="fw-bold">$120.000</p>
+                <button
+                  class="btn btn-custom w-100 btn-agregar"
+                  data-nombre="Whisky Irlandés"
+                  data-precio="120000"
+                  data-imagen="whisky_irlandes.jpg"
+                >
+                  Agregar al carrito
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div class="col">
+            <div class="card h-100">
+              <img
+                src="assets/img/whiskys/whisky_japones.jpg"
+                class="card-img-top"
+                alt="Whisky Japonés"
+              />
+              <div class="card-body">
+                <h5 class="card-title">Whisky Japonés</h5>
+                <p class="card-text">Equilibrado, suave y floral.</p>
+                <p class="fw-bold">$145.000</p>
+                <button
+                  class="btn btn-custom w-100 btn-agregar"
+                  data-nombre="Whisky Japonés"
+                  data-precio="145000"
+                  data-imagen="whisky_japones.jpg"
+                >
+                  Agregar al carrito
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div class="col">
+            <div class="card h-100">
+              <img
+                src="assets/img/whiskys/whisky_anejo_reservado.jpg"
+                class="card-img-top"
+                alt="Whisky Añejo Reserva"
+              />
+              <div class="card-body">
+                <h5 class="card-title">Whisky Añejo Reserva</h5>
+                <p class="card-text">Con notas de roble y vainilla.</p>
+                <p class="fw-bold">$138.000</p>
+                <button
+                  class="btn btn-custom w-100 btn-agregar"
+                  data-nombre="Whisky Añejo Reserva"
+                  data-precio="138000"
+                  data-imagen="whisky_anejo_reservado.jpg"
+                >
+                  Agregar al carrito
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div class="col">
+            <div class="card h-100">
+              <img
+                src="assets/img/whiskys/whisky_malta.jpg"
+                class="card-img-top"
+                alt="Whisky de Malta"
+              />
+              <div class="card-body">
+                <h5 class="card-title">Whisky de Malta</h5>
+                <p class="card-text">Single malt de sabor intenso.</p>
+                <p class="fw-bold">$142.000</p>
+                <button
+                  class="btn btn-custom w-100 btn-agregar"
+                  data-nombre="Whisky de Malta"
+                  data-precio="142000"
+                  data-imagen="whisky_malta.jpg"
+                >
+                  Agregar al carrito
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div class="col">
+            <div class="card h-100">
+              <img
+                src="assets/img/whiskys/whisky_blend_premium.jpg"
+                class="card-img-top"
+                alt="Whisky Blend Premium"
+              />
+              <div class="card-body">
+                <h5 class="card-title">Whisky Blend Premium</h5>
+                <p class="card-text">Mezcla de barricas seleccionadas.</p>
+                <p class="fw-bold">$125.000</p>
+                <button
+                  class="btn btn-custom w-100 btn-agregar"
+                  data-nombre="Whisky Blend Premium"
+                  data-precio="125000"
+                  data-imagen="whisky_blend_premium.jpg"
+                >
+                  Agregar al carrito
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div class="col">
+            <div class="card h-100">
+              <img
+                src="assets/img/whiskys/whisky_autor.jpg"
+                class="card-img-top"
+                alt="Whisky de Autor"
+              />
+              <div class="card-body">
+                <h5 class="card-title">Whisky de Autor</h5>
+                <p class="card-text">Elaborado en lotes pequeños. Exquisito.</p>
+                <p class="fw-bold">$165.000</p>
+                <button
+                  class="btn btn-custom w-100 btn-agregar"
+                  data-nombre="Whisky de Autor"
+                  data-precio="165000"
+                  data-imagen="whisky_autor.jpg"
+                >
+                  Agregar al carrito
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-light text-dark pt-5 pb-4 border-top mt-5">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-4">
+            <h5 class="text-danger">Suscríbete</h5>
+            <form id="form-suscripcion">
+              <input
+                type="email"
+                id="email-suscripcion"
+                class="form-control mb-2"
+                placeholder="Tu correo"
+                required
+              />
+              <button type="submit" class="btn btn-danger">Suscribirme</button>
+            </form>
+            <div
+              id="mensaje-suscripcion"
+              class="text-success mt-2 fw-bold"
+              style="display: none"
+            ></div>
+          </div>
+          <div class="col-md-4 text-center">
+            <h5 class="text-danger">Menú</h5>
+            <ul class="list-unstyled">
+              <li><a href="cervezas.html" class="text-dark">Cervezas</a></li>
+              <li><a href="vinos.html" class="text-dark">Vinos</a></li>
+              <li><a href="whisky.html" class="text-dark">Whisky</a></li>
+              <li><a href="tequila.html" class="text-dark">Tequila</a></li>
+            </ul>
+          </div>
+          <div class="col-md-4">
+            <h5 class="text-danger">Redes</h5>
+            <a href="#" class="text-dark d-block"
+              ><i class="bi bi-facebook"></i> Facebook</a
+            >
+            <a href="#" class="text-dark d-block"
+              ><i class="bi bi-instagram"></i> Instagram</a
+            >
+            <div class="mt-3">
+              <p>¿Deseas asistir a nuestras catas?</p>
+              <a
+                href="formulario-catas.html"
+                class="btn btn-outline-danger btn-sm"
+                >Inscribirme</a
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+      crossorigin="anonymous"
+    ></script>
+
+    <!-- scripts -->
+    <script src="assets/js/scripts/busqueda.js"></script>
+    <script src="assets/js/scripts/carrito.js"></script>
+    <script src="assets/js/scripts/contacto.js"></script>
+  </body>
+</html>
